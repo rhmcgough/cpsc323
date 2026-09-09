@@ -1,0 +1,23 @@
+## Exercise 1
+In Unity, Awake() needs to be called on active objects in the scene first, and only calls start() after the pass is complete. This ensures that every object has completedd its own setup before running to ensure safe referencing and interdependency. 
+
+## Exercise 2
+These two calls were at the end of the console log on termination of the game session. This is because these two calls happen only when the session is terminated. 
+
+## Exercise 3
+FixedUpdate() ties updating to a timing variable, such as framerate, to ensure that physics or other real time rendering can happen in an intentional timetable. FixedUpdate creates a rate of which something should be updating at, rather than Update() that allows things to occur without any form of timing. 
+
+
+## Exercise 6
+Assets/Scripts/HealthWatcher.cs(11,50): error CS0122: 'Character.health' is inaccessible due to its protection level
+
+
+## Exercise 8
+Keeping health as a public field is risky, it allows other scripts to change its value, allowing for unintentional bugs that could be anywhere in the program. [Serialize Field] allows the value of health to be editable in the inspector, but not by any other scripts, encapsulating the script so that only the programmer can intentionally change it.
+
+
+## Exercise 9
+A null reference error occurs when something in the code is referencing somemthing else that doesn't exist in the specified location. The error states what the null reference is and where it traces to. The way I fixed it is adding a null reference check, that way the program will continue to run if there is a null reference, but will warn the developer in the console and not change anything in the game. 
+
+## Exercise 10
+Get component returned null because there was nothing to find for the audio source, calling .Play() on the null result threw a MissingComponentException. To address this, I added a check to verify if the component exists, and if not it will tell the developer in the console and allow for play to continue. The guard allows for the game to not break if the component is accidentally removed, and tells the developer that there is something that needss to be addressed.
