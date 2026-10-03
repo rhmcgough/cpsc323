@@ -1,0 +1,21 @@
+function countdown (integer x)
+{
+	if (x > 0)
+	{
+		x = x - 1;
+		return x;
+	}
+	else
+	{
+		put ("This is already at 0");
+}
+
+@
+	integer x;
+@
+	get (x);
+	while (x != 0)
+	{
+		put (count(x));
+		x = x - 1;
+	}
