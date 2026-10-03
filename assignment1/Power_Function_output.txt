@@ -10,12 +10,11 @@
 | Separator   | ,           |
 | Keyword     | integer     |
 | Identifier  | y           |
+| Separator   | ,           |
+| Keyword     | real        |
+| Identifier  | result      |
 | Separator   | )           |
 | Separator   | {           |
-| Identifier  | result      |
-| Operator    | =           |
-| Integer     | 1           |
-| Separator   | ;           |
 | Keyword     | while       |
 | Separator   | (           |
 | Identifier  | y           |
@@ -70,6 +69,9 @@
 | Keyword     | real        |
 | Identifier  | x           |
 | Separator   | ;           |
+| Keyword     | real        |
+| Identifier  | result      |
+| Separator   | ;           |
 | Separator   | @           |
 | Keyword     | get         |
 | Separator   | (           |
@@ -85,6 +87,8 @@
 | Identifier  | x           |
 | Separator   | ,           |
 | Identifier  | y           |
+| Separator   | ,           |
+| Identifier  | result      |
 | Separator   | )           |
 | Separator   | ;           |
 | Separator   | )           |
