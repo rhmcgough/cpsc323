@@ -1,0 +1,9 @@
+function addition (real x, real y)
+{
+	return (x + y);
+}
+@
+	real x, y;
+@
+	get (x, y);
+	put addition(x, y);
