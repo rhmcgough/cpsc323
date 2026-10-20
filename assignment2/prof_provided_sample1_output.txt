@@ -1,0 +1,14 @@
+# prof_provided_sample1_output.txt
+
+| Token:     | Lexeme:    |
+| ---------- | ---------- |
+| Keyword    | while      |
+| Separator  | (          |
+| Identifier | fahr       |
+| Operator   | <=         |
+| Identifier | upper      |
+| Separator  | )          |
+| Identifier | a          |
+| Operator   | =          |
+| Real       | 23.00      |
+| Separator  | ;          |

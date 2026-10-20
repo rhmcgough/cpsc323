@@ -1,0 +1,29 @@
+! Find x to the power of y !
+function power(real x, integer y, real result) 
+{ 
+	while (y != 0) 
+	{
+		if (y < 0) 
+		{		
+			result = result / x;
+			y = y + 1;
+		}
+		else 
+		{
+			result = result * x;
+			y = y - 1;
+		}
+	}
+
+	return result;
+
+function
+
+@
+	integer y;
+	real x;
+	real result;
+
+@
+	get (x, y);
+	put (power (x, y, result);)
