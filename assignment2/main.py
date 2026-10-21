@@ -1,4 +1,5 @@
 # main.py - CPSC 323 Assignment 2: Syntax Analyzer (Recursive Descent Parser) for Rat26F
+# Hoang Nguyen
 
 import sys
 from lexer import lexer
