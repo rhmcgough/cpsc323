@@ -54,6 +54,15 @@ def match(x):
     else:
         error("'" + x + "'")
 
+# True if current token is integer / boolean / real
+def is_qualifier():
+    return is_("integer") or is_("boolean") or is_("real")
+
+
+# True if current token can start a statement
+def is_statement():
+    return is_("Identifier") or is_("{") or is_("if") or is_("return") or is_("put") or is_("get") or is_("while")
+
 
 
 # Read the file, parse it, write the output file
