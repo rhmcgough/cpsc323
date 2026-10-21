@@ -129,7 +129,13 @@ def ids():
     rule("<IDs Prime> -> <Empty>")
 
 
-
+# R14. <Statement List> -> <Statement> <Statement List Prime>
+def statement_list():
+    rule("<Statement List> -> <Statement> <Statement List Prime>")
+    statement()
+    while is_statement():
+        statement()
+    rule("<Statement List Prime> -> <Empty>")
 
 
 # Read the file, parse it, write the output file
