@@ -107,6 +107,23 @@ def qualifier():
     rule("<Qualifier> -> " + lexeme.lower())
     next_token()
 
+
+# R10-R12. <Opt Declaration List>: zero or more "<Qualifier> <IDs> ;"
+def declaration_list():
+    if not is_qualifier():
+        rule("<Opt Declaration List> -> <Empty>")
+    while is_qualifier():
+        rule("<Declaration> -> <Qualifier> <IDs>")
+        qualifier()
+        ids()
+        match(";")
+ 
+
+
+
+
+
+
 # Read the file, parse it, write the output file
 def main():
     global source, out
