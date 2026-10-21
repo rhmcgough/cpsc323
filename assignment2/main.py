@@ -75,6 +75,27 @@ def rat26f():
     if token_type != "EOF":
         error("end of file")
 
+
+# R4. <Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>
+def function_def():
+    rule("<Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>")
+    match("function")
+    match("Identifier")
+    match("(")
+    if is_("Identifier"):
+        parameter()
+        while is_(","):
+            match(",")
+            parameter()
+    match(")")
+    declaration_list()
+    rule("<Body> -> { <Statement List> }")
+    match("{")
+    statement_list()
+    match("}")
+
+
+
 # Read the file, parse it, write the output file
 def main():
     global source, out
