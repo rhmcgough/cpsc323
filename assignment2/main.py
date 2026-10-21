@@ -40,3 +40,34 @@ def error(expected):
     out.close()
     print(msg)
     sys.exit(1)
+
+
+
+
+
+
+
+
+
+# Read the file, parse it, write the output file
+def main():
+    global source, out
+    if len(sys.argv) < 2 or sys.argv[1][-4:] != ".txt":
+        print("Usage: python main.py <filename.txt>")
+        return
+    try:
+        source = open(sys.argv[1]).read()
+    except FileNotFoundError:
+        print("File not found: " + sys.argv[1])
+        return
+ 
+    out_name = sys.argv[1][:-4] + "_output.txt"
+    out = open(out_name, "w")
+    next_token()
+    rat26f()
+    out.write("\nParsing finished: no syntax errors.\n")
+    out.close()
+    print("No syntax errors. Output written to " + out_name)
+ 
+ 
+main()
