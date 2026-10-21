@@ -138,6 +138,89 @@ def statement_list():
     rule("<Statement List Prime> -> <Empty>")
 
 
+
+
+# R15-R22. <Statement> -> <Compound> | <Assign> | <If> | <Return> | <Print> | <Scan> | <While>
+# R14. <Statement List> -> <Statement> <Statement List Prime>
+def statement_list():
+    rule("<Statement List> -> <Statement> <Statement List Prime>")
+    statement()
+    while is_statement():
+        statement()
+    rule("<Statement List Prime> -> <Empty>")
+ 
+ 
+# R15-R22. <Statement> -> <Compound> | <Assign> | <If> | <Return> | <Print> | <Scan> | <While>
+def statement():
+    if is_("{"):
+        rule("<Statement> -> <Compound>")
+        rule("<Compound> -> { <Statement List> }")
+        match("{")
+        statement_list()
+        match("}")
+    elif is_("Identifier"):
+        rule("<Statement> -> <Assign>")
+        rule("<Assign> -> <Identifier> = <Expression> ;")
+        match("Identifier")
+        match("=")
+        expression()
+        match(";")
+    elif is_("if"):
+        rule("<Statement> -> <If>")
+        rule("<If> -> if ( <Condition> ) <Statement> <If Prime>")
+        match("if")
+        match("(")
+        condition()
+        match(")")
+        statement()
+        if is_("else"):
+            rule("<If Prime> -> else <Statement> fi")
+            match("else")
+            statement()
+        else:
+            rule("<If Prime> -> fi")
+        match("fi")
+    elif is_("return"):
+        rule("<Statement> -> <Return>")
+        match("return")
+        if is_(";"):
+            rule("<Return> -> return ;")
+        else:
+            rule("<Return> -> return <Expression> ;")
+            expression()
+        match(";")
+    elif is_("put"):
+        rule("<Statement> -> <Print>")
+        rule("<Print> -> put ( <Expression> ) ;")
+        match("put")
+        match("(")
+        expression()
+        match(")")
+        match(";")
+    elif is_("get"):
+        rule("<Statement> -> <Scan>")
+        rule("<Scan> -> get ( <IDs> ) ;")
+        match("get")
+        match("(")
+        ids()
+        match(")")
+        match(";")
+    elif is_("while"):
+        rule("<Statement> -> <While>")
+        rule("<While> -> while ( <Condition> ) <Statement>")
+        match("while")
+        match("(")
+        condition()
+        match(")")
+        statement()
+    else:
+        error("a statement")
+
+
+
+
+
+
 # Read the file, parse it, write the output file
 def main():
     global source, out
