@@ -10,3 +10,9 @@ token_type = ""                         # current token type
 lexeme = ""                             # current lexeme
 line = 1                                # current line number
 out = None                              # output file
+
+
+# Print a production rule if the switch is on
+def rule(text):
+    if PRINT_RULES:
+        out.write("     " + text + "\n")
