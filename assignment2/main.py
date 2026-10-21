@@ -42,7 +42,9 @@ def error(expected):
     sys.exit(1)
 
 
-
+# True if current token is this type (Identifier...) or this lexeme (if, ;, +...)
+def is_(x):
+    return token_type == x or lexeme.lower() == x
 
 
 
