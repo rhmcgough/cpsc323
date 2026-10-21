@@ -100,7 +100,12 @@ def parameter():
     ids()
     qualifier()
  
-
+# R8. <Qualifier> -> integer | boolean | real
+def qualifier():
+    if not is_qualifier():
+        error("integer, boolean or real")
+    rule("<Qualifier> -> " + lexeme.lower())
+    next_token()
 
 # Read the file, parse it, write the output file
 def main():
