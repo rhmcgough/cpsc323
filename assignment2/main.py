@@ -227,7 +227,26 @@ def condition():
     next_token()
     expression()
 
+# R25. <Expression> -> <Term> <Expression Prime>,  <Expression Prime> -> + <Term> <Expression Prime> | - ... | <Empty>
+def expression():
+    rule("<Expression> -> <Term> <Expression Prime>")
+    term()
+    while is_("+") or is_("-"):
+        rule("<Expression Prime> -> " + lexeme + " <Term> <Expression Prime>")
+        next_token()
+        term()
+    rule("<Expression Prime> -> <Empty>")
 
+
+# R26. <Term> -> <Factor> <Term Prime>,  <Term Prime> -> * <Factor> <Term Prime> | / ... | <Empty>
+def term():
+    rule("<Term> -> <Factor> <Term Prime>")
+    factor()
+    while is_("*") or is_("/"):
+        rule("<Term Prime> -> " + lexeme + " <Factor> <Term Prime>")
+        next_token()
+        factor()
+    rule("<Term Prime> -> <Empty>")
 
 # Read the file, parse it, write the output file
 def main():
