@@ -94,6 +94,12 @@ def function_def():
     statement_list()
     match("}")
 
+# R7. <Parameter> -> <IDs> <Qualifier>
+def parameter():
+    rule("<Parameter> -> <IDs> <Qualifier>")
+    ids()
+    qualifier()
+ 
 
 
 # Read the file, parse it, write the output file
