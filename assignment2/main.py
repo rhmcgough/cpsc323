@@ -16,3 +16,18 @@ out = None                              # output file
 def rule(text):
     if PRINT_RULES:
         out.write("     " + text + "\n")
+
+# Get the next token (skip comments) and print it
+def next_token():
+    global pos, token_type, lexeme, line
+    tok, pos = lexer(source, pos)
+    while tok is not None and tok.token == "Comment":
+        tok, pos = lexer(source, pos)
+    if tok is None:
+        token_type = "EOF"
+        lexeme = "EOF"
+        return
+    token_type = tok.token
+    lexeme = tok.lexeme
+    line = tok.line
+    out.write("Token: " + token_type.ljust(12) + "Lexeme: " + lexeme + "\n")
