@@ -47,7 +47,12 @@ def is_(x):
     return token_type == x or lexeme.lower() == x
 
 
-
+# Check the current token, then move to the next one
+def match(x):
+    if is_(x):
+        next_token()
+    else:
+        error("'" + x + "'")
 
 
 
