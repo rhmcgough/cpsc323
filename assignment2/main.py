@@ -217,7 +217,15 @@ def statement():
         error("a statement")
 
 
-
+# R23-R24. <Condition> -> <Expression> <Relop> <Expression>
+def condition():
+    rule("<Condition> -> <Expression> <Relop> <Expression>")
+    expression()
+    if lexeme not in ["==", "!=", ">", "<", "<=", ">="]:
+        error("a relational operator")
+    rule("<Relop> -> " + lexeme)
+    next_token()
+    expression()
 
 
 
