@@ -248,6 +248,35 @@ def term():
         factor()
     rule("<Term Prime> -> <Empty>")
 
+# R27-R28. <Factor> -> - <Primary> | <Primary>
+def factor():
+    if is_("-"):
+        rule("<Factor> -> - <Primary>")
+        next_token()
+    else:
+        rule("<Factor> -> <Primary>")
+ 
+    if is_("Identifier"):
+        next_token()
+        if is_("("):
+            rule("<Primary> -> <Identifier> ( <IDs> )")
+            match("(")
+            ids()
+            match(")")
+        else:
+            rule("<Primary> -> <Identifier>")
+    elif is_("Integer") or is_("Real") or is_("true") or is_("false"):
+        rule("<Primary> -> " + lexeme)
+        next_token()
+    elif is_("("):
+        rule("<Primary> -> ( <Expression> )")
+        match("(")
+        expression()
+        match(")")
+    else:
+        error("an Identifier, number, true, false or '('")
+
+
 # Read the file, parse it, write the output file
 def main():
     global source, out
