@@ -31,3 +31,12 @@ def next_token():
     lexeme = tok.lexeme
     line = tok.line
     out.write("Token: " + token_type.ljust(12) + "Lexeme: " + lexeme + "\n")
+
+
+# Print an error message and stop
+def error(expected):
+    msg = "Error at line " + str(line) + ": expected " + expected + " but found " + token_type + " '" + lexeme + "'"
+    out.write("\n" + msg + "\n")
+    out.close()
+    print(msg)
+    sys.exit(1)
