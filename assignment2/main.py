@@ -118,7 +118,15 @@ def declaration_list():
         ids()
         match(";")
  
-
+# R13. <IDs> -> <Identifier> <IDs Prime>,  <IDs Prime> -> , <IDs> | <Empty>
+def ids():
+    rule("<IDs> -> <Identifier> <IDs Prime>")
+    match("Identifier")
+    while is_(","):
+        rule("<IDs Prime> -> , <IDs>")
+        match(",")
+        match("Identifier")
+    rule("<IDs Prime> -> <Empty>")
 
 
 
