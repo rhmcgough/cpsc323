@@ -63,7 +63,17 @@ def is_qualifier():
 def is_statement():
     return is_("Identifier") or is_("{") or is_("if") or is_("return") or is_("put") or is_("get") or is_("while")
 
-
+# R1. <Rat26F> -> <Opt Function Definitions> @ <Opt Declaration List> @ <Statement List>
+def rat26f():
+    rule("<Rat26F> -> <Opt Function Definitions> @ <Opt Declaration List> @ <Statement List>")
+    while is_("function"):
+        function_def()
+    match("@")
+    declaration_list()
+    match("@")
+    statement_list()
+    if token_type != "EOF":
+        error("end of file")
 
 # Read the file, parse it, write the output file
 def main():
