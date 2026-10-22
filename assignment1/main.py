@@ -238,6 +238,9 @@ class FSM():
         elif self.state in {"Identifier", "Integer", "Real"}:
             token_type = self.state
 
+        else:
+            token_type = "Unknown"
+
 
         return token_type, lexeme, position
 
