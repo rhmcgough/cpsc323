@@ -1,94 +1,11 @@
-# Power_Function_output.txt
+Token: Keyword     Lexeme: function
+     <Rat26F> -> <Opt Function Definitions> @ <Opt Declaration List> @ <Statement List>
+     <Opt Function Definitions> -> <Function Definitions>
+     <Function Definitions> -> <Function> <Function Definitions Prime>
+     <Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>
+Token: Identifier  Lexeme: power
+Token: Separator   Lexeme: (
+Token: Keyword     Lexeme: real
+     <Opt Parameter List> -> <Empty>
 
-| Token:      | Lexeme:     |
-| ----------- | ----------- |
-| Keyword     | function    |
-| Identifier  | power       |
-| Separator   | (           |
-| Keyword     | real        |
-| Identifier  | x           |
-| Separator   | ,           |
-| Keyword     | integer     |
-| Identifier  | y           |
-| Separator   | ,           |
-| Keyword     | real        |
-| Identifier  | result      |
-| Separator   | )           |
-| Separator   | {           |
-| Keyword     | while       |
-| Separator   | (           |
-| Identifier  | y           |
-| Operator    | !=          |
-| Integer     | 0           |
-| Separator   | )           |
-| Separator   | {           |
-| Keyword     | if          |
-| Separator   | (           |
-| Identifier  | y           |
-| Operator    | <           |
-| Integer     | 0           |
-| Separator   | )           |
-| Separator   | {           |
-| Identifier  | result      |
-| Operator    | =           |
-| Identifier  | result      |
-| Operator    | /           |
-| Identifier  | x           |
-| Separator   | ;           |
-| Identifier  | y           |
-| Operator    | =           |
-| Identifier  | y           |
-| Operator    | +           |
-| Integer     | 1           |
-| Separator   | ;           |
-| Separator   | }           |
-| Keyword     | else        |
-| Separator   | {           |
-| Identifier  | result      |
-| Operator    | =           |
-| Identifier  | result      |
-| Operator    | *           |
-| Identifier  | x           |
-| Separator   | ;           |
-| Identifier  | y           |
-| Operator    | =           |
-| Identifier  | y           |
-| Operator    | -           |
-| Integer     | 1           |
-| Separator   | ;           |
-| Separator   | }           |
-| Separator   | }           |
-| Keyword     | return      |
-| Identifier  | result      |
-| Separator   | ;           |
-| Keyword     | function    |
-| Separator   | @           |
-| Keyword     | integer     |
-| Identifier  | y           |
-| Separator   | ;           |
-| Keyword     | real        |
-| Identifier  | x           |
-| Separator   | ;           |
-| Keyword     | real        |
-| Identifier  | result      |
-| Separator   | ;           |
-| Separator   | @           |
-| Keyword     | get         |
-| Separator   | (           |
-| Identifier  | x           |
-| Separator   | ,           |
-| Identifier  | y           |
-| Separator   | )           |
-| Separator   | ;           |
-| Keyword     | put         |
-| Separator   | (           |
-| Identifier  | power       |
-| Separator   | (           |
-| Identifier  | x           |
-| Separator   | ,           |
-| Identifier  | y           |
-| Separator   | ,           |
-| Identifier  | result      |
-| Separator   | )           |
-| Separator   | ;           |
-| Separator   | )           |
+Error at line 2: expected ')' but found Keyword 'real'

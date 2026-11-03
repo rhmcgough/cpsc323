@@ -1,5 +1,5 @@
-# Project 1 (Lexical Analyzer and Finite State Machine)
-This is our implementation of a lexical analyzer and finite state machine for CPSC 323 Project 1 at CSUF, in fall 2026.
+# Project 2 (Syntax Analyzer)
+This is our implementation of a syntax analyzer and for CPSC 323 Project 2 at CSUF, in fall 2026.
 
 ## Getting Started
 ### Dependencies: 
@@ -8,15 +8,16 @@ This is our implementation of a lexical analyzer and finite state machine for CP
 
 ## Usage 
 ```
-
+python3 main.py <filename.txt>
 ```
 
 ## Using the Program:
 1. If you're viewing this on github, clone this repository!
-2. Navigate to the clone repository's directory. For this phase in the project's development, navigate to `cpsc323/assignment1`
-3. Add any files you would like to process into the directory. It should be in the sam
+2. Navigate to the clone repository's directory. For this phase in the project's development, navigate to `cpsc323/assignment2`
+3. Add any files you would like to process into the directory. 
 4. Start the program using `python main.py <your_file_here.txt>`. Note that the program will reject any file that does not end in .txt.
 5. The program will produce a file in the same directory, adding `_output.txt` to the end of your file's name.
 
 ## Contributors
 * Ryan McGough
+* Hoang Nguyen

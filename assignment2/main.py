@@ -1,5 +1,5 @@
 # main.py - CPSC 323 Assignment 2: Syntax Analyzer (Recursive Descent Parser) for Rat26F
-# Hoang Nguyen
+
 
 import sys
 from lexer import lexer
@@ -30,7 +30,7 @@ def next_token():
         return
     token_type = tok.token
     lexeme = tok.lexeme
-    line = tok.line
+    line = source.count("\n", 0, pos) + 1
     out.write("Token: " + token_type.ljust(12) + "Lexeme: " + lexeme + "\n")
 
 

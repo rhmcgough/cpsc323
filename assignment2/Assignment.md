@@ -1,46 +1,87 @@
-# Assignment 1        
-CS323                     
-Due dates: Softcopy by 10/4 (Sunday), 11:59 pm
-                                                          
-The first assignment is to write a lexical analyzer (lexer).
-** You can build your entire lexer using a FSM, Or build using at least FSMs for identifier, integer and real (the rest can be written ad-hoc) but YOU HAVE TO CONSTRUCT A FSM for this assignment otherwise, there will be a deduction of 2 points! **
-       
-** Note: In your documentation (design section), YOU MUST write the REs for Identifiers, Real and Integer, and also show the NFSM using Thompson. **
+# CS323 Assignment 2
+**Both sections: Due by 11/8 (Sunday), by 11:59 pm**
 
-## The lexer
-A major component of your assignment will be to write a procedure (Function) – lexer (),  that returns a  token when it is needed.  Your lexer()  should return a record, one field for the token and another field the actual "value" of the token (lexeme), i.e. the instance of a token.
+The second assignment is to write a syntax analyzer. You may use any top-down parser such as RDP, a predictive recursive descent parser or a table-driven predictive parser. Hence, your assignment consists of the following tasks:
 
-**Your main program should test the lexer i.e., your program should read a file containing the source code of Rat26F to generate tokens and write out the results to an output file.**
-Make sure that you print both, the tokens and lexemes. 
+1. Rewrite the grammar Rat26F to remove any left recursion (Also, use left factorization if necessary)
+2. Use the lexer() generated in the assignment 1 to get the tokens
+3. The parser should print to an output file the tokens, lexemes and the production rules used; That is, first, write the token and lexeme found. Then, print out all productions rules used for analyzing this token
+   Note:
+   - a simple way to do it is to have a “print statement” at the beginning of each function that will print the production rule.
+   - It would be a good idea to have a “switch” with the “print statement” so that you can turn it on or off.
+4. Error handling: if a syntax error occurs, your parser should generate a meaningful error message, such as token, lexeme, line number, and error type etc. Then, your program may exit or you may continue for further analysis. The bottom line is that your program must be able to parse the entire program if it is syntactically correct.
+5. Turn in your assignment according to the specifications given in the project outline
 
-Basically, your main program should work as follows:
+## Example
 
+Assume we have the following statement
 ```
-    while not finished (i.e. not end of the source file) do
-        call the lexer for a token
-        print the token and lexeme
-    endwhile
-```
-
-Do at least 3 test cases and make sure that you turn in proper documentation using the documentation template.
-
-A simple test case: 
-                     
-(Partial) Source code: 
-```
-while  (fahr <= upper)   a = 23.00;  ! this is  sample !
+...more...
+a = b + c;
+...more...
 ```
 
-| Output:       |        |
-|---------------|--------|
-| token         | lexeme |
-| keyword       | while  |
-| separator     | (      |
-|identifier     | fahr   |
-|operator       | <=     |
-|identifier     | upper  |
-|separator      | )      |
-|identifier     | a      |
-|operator       | =      |
-|real           | 23.00  |
-|Separator      | ;      |
+One possible output would be as follows:
+```
+... more...
+Token: Identifier          Lexeme: a
+     <Statement> -> <Assign>
+     <Assign> ->  <Identifier>  = <Expression> ;
+Token: Operator          Lexeme: =
+Token: Identifier          Lexeme: b
+     <Expression> -> <Term> <Expression Prime>
+     <Term> -> <Factor> <Term Prime>
+     <Factor> -> <Identifier>
+Token:  Operator          Lexeme: +
+     <Term Prime> ->
+     <Expression Prime> -> + <Term> <Expression Prime>
+Token:  Identifier           Lexeme: c
+     <Term>  -> <Factor> <Term Prime>
+     <Factor> -> <Identifier>
+Token: Separator           Lexeme: ;
+     <Term Prime> ->
+     <Expression Prime> ->
+...more...
+```
+
+## One Possible Example
+Productions:
+```
+E -> TE’
+E’ -> + TE’   |     - TE’   | ε
+T -> id
+```
+
+```
+Function E ()
+{
+   if switch  print (“ E -> TE’);  /* switch is a boolean */
+   T ();
+   E’();
+   If not eof marker then
+      error-message
+}
+```
+
+```
+Function E’()
+{
+   if switch  print (“ E’ -> +TE’ | - TE’ | ε”);
+   If token = + or – then
+   {
+      Lexer();
+      T();
+      E’();
+   }
+}
+```
+
+```
+Function T();
+{
+   if switch  print (“ T -> id”);
+   If token is id then
+      lexer()
+   else error-message (id expected)
+}
+```
