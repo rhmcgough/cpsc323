@@ -1,4 +1,4 @@
-function addition (real x, real y)
+function addition (x real, y real)
 {
 	return (x + y);
 }
@@ -6,4 +6,4 @@ function addition (real x, real y)
 	real x, y;
 @
 	get (x, y);
-	put addition(x, y);
+	put (addition(x, y));
