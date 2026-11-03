@@ -1,5 +1,5 @@
 ! Find x to the power of y !
-function power(real x, integer y, real result) 
+function power(x real, y integer, result real) 
 { 
 	while (y != 0) 
 	{
@@ -13,11 +13,11 @@ function power(real x, integer y, real result)
 			result = result * x;
 			y = y - 1;
 		}
+		fi
 	}
 
 	return result;
-
-function
+}
 
 @
 	integer y;
@@ -26,4 +26,4 @@ function
 
 @
 	get (x, y);
-	put (power (x, y, result);)
+	put (power (x, y, result));
