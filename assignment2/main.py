@@ -137,19 +137,6 @@ def statement_list():
     while is_statement():
         statement()
     rule("<Statement List Prime> -> <Empty>")
-
-
-
-
-# R15-R22. <Statement> -> <Compound> | <Assign> | <If> | <Return> | <Print> | <Scan> | <While>
-# R14. <Statement List> -> <Statement> <Statement List Prime>
-def statement_list():
-    rule("<Statement List> -> <Statement> <Statement List Prime>")
-    statement()
-    while is_statement():
-        statement()
-    rule("<Statement List Prime> -> <Empty>")
- 
  
 # R15-R22. <Statement> -> <Compound> | <Assign> | <If> | <Return> | <Print> | <Scan> | <While>
 def statement():
