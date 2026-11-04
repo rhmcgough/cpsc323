@@ -21,3 +21,4 @@ python3 main.py <filename.txt>
 ## Contributors
 * Ryan McGough
 * Hoang Nguyen
+* Alejandro Rojas
