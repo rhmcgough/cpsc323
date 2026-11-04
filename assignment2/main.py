@@ -10,6 +10,8 @@ pos = 0                                 # where the lexer reads next
 token_type = ""                         # current token type
 lexeme = ""                             # current lexeme
 line = 1                                # current line number
+prev_lexeme = ""                        # last token read (for error messages)
+prev_line = 1                           # line of the last token# current line number
 out = None                              # output file
 
 
@@ -20,7 +22,9 @@ def rule(text):
 
 # Get the next token (skip comments) and print it
 def next_token():
-    global pos, token_type, lexeme, line
+    global pos, token_type, lexeme, line, prev_lexeme, prev_line
+    prev_lexeme = lexeme
+    prev_line = line
     tok, pos = lexer(source, pos)
     while tok is not None and tok.token == "Comment":
         tok, pos = lexer(source, pos)
@@ -30,13 +34,23 @@ def next_token():
         return
     token_type = tok.token
     lexeme = tok.lexeme
-    line = source.count("\n", 0, pos) + 1
+    line = tok.line
     out.write("Token: " + token_type.ljust(12) + "Lexeme: " + lexeme + "\n")
 
 
 # Print an error message and stop
 def error(expected):
-    msg = "Error at line " + str(line) + ": expected " + expected + " but found " + token_type + " '" + lexeme + "'"
+    if token_type == "Unclosed Comment":
+        msg = "Lexical error at line " + str(line) + ": comment starts with '!' but is never closed"
+    elif token_type == "Unknown":
+        msg = "Lexical error at line " + str(line) + ": invalid token '" + lexeme + "'"
+    elif token_type == "EOF" and prev_lexeme == "":
+        msg = "Syntax error: the file is empty, expected " + expected
+    elif token_type == "EOF":
+        msg = "Syntax error: file ended too early, expected " + expected + " after '" + prev_lexeme + "' (line " + str(prev_line) + ")"
+    else:
+        msg = ("Syntax error at line " + str(line) + ": expected " + expected + " after '" + prev_lexeme
+               + "' (line " + str(prev_line) + ") but found " + token_type + " '" + lexeme + "'")
     out.write("\n" + msg + "\n")
     out.close()
     print(msg)
@@ -52,6 +66,8 @@ def is_(x):
 def match(x):
     if is_(x):
         next_token()
+    elif x == "Identifier":
+        error("an Identifier")
     else:
         error("'" + x + "'")
 
