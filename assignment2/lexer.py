@@ -45,9 +45,10 @@ TWO_CHARACTER_OPERATORS = {
 
 
 class Token: 
-    def __init__(self, token, lexeme):
+    def __init__(self, token, lexeme, line):
         self.token = token
-        self.lexeme = lexeme 
+        self.lexeme = lexeme
+        self.line = line 
 
 # ========================================================================
 # class FSM()
@@ -185,9 +186,13 @@ class FSM():
                     position = self.skip_comments(text, start)
                     lexeme = text[start:position]
                     token_type = "Comment"
-                    
+
+                    # No closing "!" was found: the comment never ends
+                    if position > len(text):
+                        lexeme = "!"
+                        token_type = "Unclosed Comment"
+                        
                     return token_type, lexeme, position
-    
 
         elif text[position] in OPERATORS:
             if text[start : position + 2] in TWO_CHARACTER_OPERATORS:
@@ -231,6 +236,12 @@ class FSM():
         while position < len(text) and self.transition(text[position]):
             position += 1
 
+        # A number glued to letters or "_" (like 23rty) is one invalid token
+        if self.state in {"Integer", "Real", "INT_DOT", "DOT"}:
+            while position < len(text) and (text[position].isalnum() or text[position] == "_"):
+                position += 1
+                self.state = "Unknown"
+
         lexeme = text[start:position]
         if lexeme.lower() in KEYWORDS:
             token_type = "Keyword"
@@ -259,9 +270,11 @@ def lexer(source, position):
     if position >= len(source):
         return None, position
     
+    # Line number = newlines before this token + 1
+    line = source.count("\n", 0, position) + 1
     token_type, lexeme, position = fsm.run(source, position)
 
-    return Token(token_type, lexeme), position
+    return Token(token_type, lexeme, line), position
 
     
 
